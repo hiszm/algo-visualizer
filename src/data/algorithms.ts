@@ -5,6 +5,8 @@ import { insertionSortSteps } from '@/lib/steps/insertionSort'
 import { heapSortSteps } from '@/lib/steps/heapSort'
 import { mergeSortSteps } from '@/lib/steps/mergeSort'
 import { quickSortSteps } from '@/lib/steps/quickSort'
+import { linearSearchSteps } from '@/lib/steps/linearSearch'
+import { binarySearchSteps } from '@/lib/steps/binarySearch'
 
 export const algorithms: Algorithm[] = [
   {
@@ -122,6 +124,47 @@ export const algorithms: Algorithm[] = [
     defaultInput: [5, 3, 8, 4, 2],
     generateSteps: quickSortSteps,
     renderer: 'sorting',
+  },
+  {
+    id: 'linear-search',
+    name: '线性搜索',
+    categoryId: 'searching',
+    description: '从头到尾依次检查每个元素，直到找到目标值。',
+    difficulty: 'beginner',
+    timeComplexity: 'O(n)',
+    spaceComplexity: 'O(1)',
+    pseudocode: [
+      'for i = 0 to n-1',
+      '  if a[i] == target',
+      '    return i',
+      'return -1',
+    ],
+    defaultInput: { array: [3, 7, 1, 9, 5], target: 9 },
+    generateSteps: linearSearchSteps,
+    renderer: 'searching',
+  },
+  {
+    id: 'binary-search',
+    name: '二分搜索',
+    categoryId: 'searching',
+    description: '在有序数组中每次比较中间元素，逐步缩小搜索范围。',
+    difficulty: 'beginner',
+    timeComplexity: 'O(log n)',
+    spaceComplexity: 'O(1)',
+    pseudocode: [
+      'while left <= right',
+      '  mid = (left + right) / 2',
+      '  if a[mid] == target',
+      '    return mid',
+      '  else if a[mid] < target',
+      '    left = mid + 1',
+      '  else',
+      '    right = mid - 1',
+      'return -1',
+    ],
+    defaultInput: { array: [1, 3, 5, 7, 9], target: 7 },
+    generateSteps: binarySearchSteps,
+    renderer: 'searching',
   },
 ]
 

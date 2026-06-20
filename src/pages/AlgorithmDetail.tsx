@@ -3,10 +3,38 @@ import { useMemo } from 'react'
 import { getAlgorithmById } from '@/data/algorithms'
 import { useAlgorithmPlayer } from '@/hooks/useAlgorithmPlayer'
 import SortingBars from '@/components/SortingBars/SortingBars'
+import SearchList from '@/components/SearchList/SearchList'
 import ControlBar from '@/components/ControlBar/ControlBar'
 import AnimationStage from '@/components/AnimationStage/AnimationStage'
 import InfoPanel from '@/components/InfoPanel/InfoPanel'
+import type { Algorithm, Step } from '@/types/algorithm'
 import styles from './AlgorithmDetail.module.css'
+
+function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
+  if (algorithm.renderer === 'sorting') {
+    return (
+      <SortingBars
+        array={step?.data.array || algorithm.defaultInput}
+        activeIndices={(step?.indices as number[]) || []}
+        stepType={step?.type || ''}
+      />
+    )
+  }
+
+  if (algorithm.renderer === 'searching') {
+    const data = step?.data || algorithm.defaultInput
+    return (
+      <SearchList
+        array={data.array}
+        target={data.target}
+        activeIndices={(step?.indices as number[]) || []}
+        foundIndex={data.foundIndex}
+      />
+    )
+  }
+
+  return null
+}
 
 export default function AlgorithmDetail() {
   const { algorithmId } = useParams<{ algorithmId: string }>()
@@ -30,7 +58,6 @@ export default function AlgorithmDetail() {
   } = useAlgorithmPlayer(steps)
 
   const step = steps[currentStep]
-  const data = step?.data ?? { array: algorithm.defaultInput }
 
   return (
     <div className={styles.container}>
@@ -38,11 +65,7 @@ export default function AlgorithmDetail() {
       <p className={styles.description}>{algorithm.description}</p>
 
       <AnimationStage message={step?.message || '点击播放开始'}>
-        <SortingBars
-          array={data.array}
-          activeIndices={(step?.indices as number[]) || []}
-          stepType={step?.type || ''}
-        />
+        {renderVisualization(algorithm, step)}
       </AnimationStage>
 
       <div className={styles.controlWrapper}>
