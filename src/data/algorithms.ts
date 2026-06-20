@@ -248,7 +248,7 @@ export const algorithms: Algorithm[] = [
     categoryId: 'graph',
     description: '贪心算法：每次选择距离起点最近的未确定节点，逐步扩展最短路径树。',
     difficulty: 'intermediate',
-    timeComplexity: 'O(V + E log V)',
+    timeComplexity: 'O(V²)',
     spaceComplexity: 'O(V)',
     pseudocode: [
       'dist[start] = 0, dist[others] = INF',

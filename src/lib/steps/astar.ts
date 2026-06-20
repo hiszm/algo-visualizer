@@ -2,7 +2,7 @@ import type { Step } from '@/types/algorithm'
 import type { GraphEdge, GraphNode } from '@/lib/graphLayout'
 
 function heuristic(a: GraphNode, b: GraphNode): number {
-  // Use Euclidean distance if x/y are present, otherwise 0
+  // Use Manhattan distance if x/y are present, otherwise 0
   if (a.x !== undefined && a.y !== undefined && b.x !== undefined && b.y !== undefined) {
     return Math.abs(a.x - b.x) + Math.abs(a.y - b.y)
   }
@@ -44,7 +44,7 @@ export function astarSteps(input: {
 
   const startNode = nodes.find((n) => n.id === startId)!
   dist.set(startId, 0)
-  fScore.set(startId, endNode ? heuristic(startNode, endNode) : 0)
+  fScore.set(startId, heuristic(startNode, endNode))
   openSet.add(startId)
 
   while (openSet.size > 0) {
@@ -107,7 +107,7 @@ export function astarSteps(input: {
           dist.set(edge.to, tentativeDist)
           parent.set(edge.to, currentId)
           const toNode = nodes.find((n) => n.id === edge.to)!
-          fScore.set(edge.to, tentativeDist + (endNode ? heuristic(toNode, endNode) : 0))
+          fScore.set(edge.to, tentativeDist + heuristic(toNode, endNode))
           openSet.add(edge.to)
           steps.push({
             type: 'compare',
