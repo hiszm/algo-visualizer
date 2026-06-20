@@ -97,6 +97,32 @@
   min-width: 0;
 }
 
+.infoOnlyStage {
+  background: var(--color-bg-base);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.infoOnlyMessage {
+  font-size: 16px;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.infoOnlyContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.infoOnlyContent p {
+  font-size: 14px;
+  color: var(--color-text-regular);
+  line-height: 1.6;
+}
+
 @media (max-width: 992px) {
   .content {
     grid-template-columns: 1fr;

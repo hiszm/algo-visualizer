@@ -21,7 +21,8 @@ export interface Algorithm {
   pseudocode: string[]
   defaultInput: any
   generateSteps: (input: any) => Step[]
-  renderer: 'sorting' | 'searching' | 'graph'
+  renderer: 'sorting' | 'searching' | 'graph' | 'number-pair' | 'run-length' | 'huffman-tree' | 'list-search' | 'info'
+  extendedDescription?: string[]
 }
 
 export interface Category {

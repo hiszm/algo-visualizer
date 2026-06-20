@@ -10,6 +10,10 @@ const categoryDescriptions: Record<string, string> = {
   sorting: '掌握常用排序算法的执行过程与复杂度分析，从冒泡到快速排序一网打尽。',
   searching: '在有序与无序数据中查找目标值，理解线性搜索与二分搜索的核心差异。',
   graph: '遍历图结构并求解最短路径，直观感受 BFS、DFS、Dijkstra 等经典算法。',
+  math: '通过动画理解数学算法的基本思想，包括最大公约数与素性测试。',
+  compression: '探索数据压缩的核心方法，观察游程编码与霍夫曼编码如何减少数据体积。',
+  security: '了解现代密码学与安全通信的基础概念，从加密到数字签名逐步展开。',
+  'data-structure': '学习基础数据结构的存储与查找方式，从列表的线性查找开始。',
 }
 
 export default function Category() {

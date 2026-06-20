@@ -35,6 +35,22 @@
   background: linear-gradient(90deg, #52c41a, #95de64);
 }
 
+.section[data-category='math']::before {
+  background: linear-gradient(90deg, #722ed1, #b37feb);
+}
+
+.section[data-category='compression']::before {
+  background: linear-gradient(90deg, #eb2f96, #ffadd2);
+}
+
+.section[data-category='security']::before {
+  background: linear-gradient(90deg, #f5222d, #ff7875);
+}
+
+.section[data-category='data-structure']::before {
+  background: linear-gradient(90deg, #13c2c2, #5cdbd3);
+}
+
 .section h3 {
   position: relative;
   z-index: 1;
@@ -70,4 +86,17 @@
   font-size: 12px;
   color: var(--color-text-secondary);
   margin-bottom: 4px;
+}
+
+.extended {
+  margin-top: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.extended p {
+  font-size: 14px;
+  color: var(--color-text-regular);
+  line-height: 1.6;
 }

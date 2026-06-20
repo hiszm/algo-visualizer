@@ -1,8 +1,8 @@
 import styles from './SearchList.module.css'
 
 interface SearchListProps {
-  array: number[]
-  target: number
+  array: (number | string)[]
+  target: number | string
   activeIndices: number[]
   foundIndex: number | null
 }

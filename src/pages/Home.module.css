@@ -139,6 +139,22 @@
   background: linear-gradient(90deg, #52c41a, #95de64);
 }
 
+.card[data-category='math']::before {
+  background: linear-gradient(90deg, #722ed1, #b37feb);
+}
+
+.card[data-category='compression']::before {
+  background: linear-gradient(90deg, #eb2f96, #ffadd2);
+}
+
+.card[data-category='security']::before {
+  background: linear-gradient(90deg, #f5222d, #ff7875);
+}
+
+.card[data-category='data-structure']::before {
+  background: linear-gradient(90deg, #13c2c2, #5cdbd3);
+}
+
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);

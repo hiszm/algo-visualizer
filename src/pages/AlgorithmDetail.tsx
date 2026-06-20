@@ -8,6 +8,9 @@ import ControlBar from '@/components/ControlBar/ControlBar'
 import AnimationStage from '@/components/AnimationStage/AnimationStage'
 import InfoPanel from '@/components/InfoPanel/InfoPanel'
 import GraphCanvas from '@/components/GraphCanvas/GraphCanvas'
+import NumberPair from '@/components/NumberPair/NumberPair'
+import RunLengthEncoder from '@/components/RunLengthEncoder/RunLengthEncoder'
+import HuffmanTree from '@/components/HuffmanTree/HuffmanTree'
 import type { GraphNode, GraphEdge } from '@/lib/graphLayout'
 import type { Algorithm, Step } from '@/types/algorithm'
 import styles from './AlgorithmDetail.module.css'
@@ -16,6 +19,10 @@ const categoryNames: Record<string, string> = {
   sorting: '排序',
   searching: '搜索',
   graph: '图论',
+  math: '数学',
+  compression: '数据压缩',
+  security: '安全',
+  'data-structure': '数据结构',
 }
 
 function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
@@ -53,18 +60,67 @@ function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
     )
   }
 
+  if (algorithm.renderer === 'number-pair') {
+    const data = step?.data || algorithm.defaultInput
+    return (
+      <NumberPair
+        a={data.a}
+        b={data.b}
+        quotient={data.quotient}
+        remainder={data.remainder}
+        activeField={(step?.indices as string[])[0] || null}
+        stepType={step?.type || ''}
+      />
+    )
+  }
+
+  if (algorithm.renderer === 'run-length') {
+    const data = step?.data || algorithm.defaultInput
+    return (
+      <RunLengthEncoder
+        original={data.original}
+        encoded={data.encoded}
+        activeIndex={(step?.indices as number[])[0] ?? -1}
+        currentChar={data.currentChar}
+        count={data.count}
+      />
+    )
+  }
+
+  if (algorithm.renderer === 'huffman-tree') {
+    const data = step?.data || algorithm.defaultInput
+    return (
+      <HuffmanTree
+        nodes={data.nodes || []}
+        activeNodeIds={(step?.indices as string[]) || []}
+        codes={data.codes || {}}
+      />
+    )
+  }
+
+  if (algorithm.renderer === 'list-search') {
+    const data = step?.data || algorithm.defaultInput
+    return (
+      <SearchList
+        array={data.list}
+        target={data.target}
+        activeIndices={(step?.indices as number[]) || []}
+        foundIndex={data.foundIndex}
+      />
+    )
+  }
+
+  if (algorithm.renderer === 'info') {
+    return null
+  }
+
   return null
 }
 
 export default function AlgorithmDetail() {
   const { algorithmId } = useParams<{ algorithmId: string }>()
   const algorithm = useMemo(() => getAlgorithmById(algorithmId || ''), [algorithmId])
-
-  if (!algorithm) {
-    return <Navigate to="/" replace />
-  }
-
-  const steps = useMemo(() => algorithm.generateSteps(algorithm.defaultInput), [algorithm])
+  const steps = useMemo(() => algorithm?.generateSteps(algorithm.defaultInput) || [], [algorithm])
   const {
     currentStep,
     isPlaying,
@@ -77,7 +133,12 @@ export default function AlgorithmDetail() {
     setSpeed,
   } = useAlgorithmPlayer(steps)
 
+  if (!algorithm) {
+    return <Navigate to="/" replace />
+  }
+
   const step = steps[currentStep]
+  const isInfoOnly = algorithm.renderer === 'info'
 
   return (
     <div className={styles.container}>
@@ -95,24 +156,41 @@ export default function AlgorithmDetail() {
 
       <div className={styles.content}>
         <div className={styles.stageColumn}>
-          <AnimationStage message={step?.message || '点击播放开始'}>
-            {renderVisualization(algorithm, step)}
-          </AnimationStage>
+          {!isInfoOnly && (
+            <>
+              <AnimationStage message={step?.message || '点击播放开始'}>
+                {renderVisualization(algorithm, step)}
+              </AnimationStage>
 
-          <div className={styles.controlWrapper}>
-            <ControlBar
-              isPlaying={isPlaying}
-              currentStep={currentStep}
-              totalSteps={steps.length}
-              speed={speed}
-              onPlay={play}
-              onPause={pause}
-              onReset={reset}
-              onNext={next}
-              onPrev={prev}
-              onSpeedChange={setSpeed}
-            />
-          </div>
+              <div className={styles.controlWrapper}>
+                <ControlBar
+                  isPlaying={isPlaying}
+                  currentStep={currentStep}
+                  totalSteps={steps.length}
+                  speed={speed}
+                  onPlay={play}
+                  onPause={pause}
+                  onReset={reset}
+                  onNext={next}
+                  onPrev={prev}
+                  onSpeedChange={setSpeed}
+                />
+              </div>
+            </>
+          )}
+
+          {isInfoOnly && (
+            <div className={styles.infoOnlyStage}>
+              <p className={styles.infoOnlyMessage}>{algorithm.description}</p>
+              {algorithm.extendedDescription && (
+                <div className={styles.infoOnlyContent}>
+                  {algorithm.extendedDescription.map((text, index) => (
+                    <p key={index}>{text}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className={styles.infoColumn}>

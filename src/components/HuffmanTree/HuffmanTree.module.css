@@ -1,0 +1,75 @@
+.container {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.tree {
+  width: 100%;
+  height: 300px;
+}
+
+.node {
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.nodeCircle {
+  fill: var(--color-bg-page);
+  stroke: var(--color-border);
+  stroke-width: 2;
+}
+
+.nodeActive {
+  stroke: var(--color-primary);
+  stroke-width: 3;
+  fill: rgba(24, 144, 255, 0.12);
+}
+
+.nodeFinal {
+  stroke: var(--color-success);
+  fill: rgba(82, 196, 26, 0.12);
+}
+
+.edge {
+  stroke: var(--color-border);
+  stroke-width: 2;
+  fill: none;
+}
+
+.edgeActive {
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+.label {
+  font-size: 12px;
+  fill: var(--color-text-primary);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.weight {
+  font-size: 10px;
+  fill: var(--color-text-secondary);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  justify-content: center;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-page);
+  border-radius: var(--radius-base);
+  color: var(--color-text-regular);
+}
