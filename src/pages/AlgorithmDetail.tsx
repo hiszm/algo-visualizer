@@ -64,11 +64,11 @@ function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
     const data = step?.data || algorithm.defaultInput
     return (
       <NumberPair
-        a={data.a}
-        b={data.b}
+        a={data.a ?? data.n}
+        b={data.b ?? data.divisor}
         quotient={data.quotient}
         remainder={data.remainder}
-        activeField={(step?.indices as string[])[0] || null}
+        activeField={(step?.indices as string[] | undefined)?.[0] || null}
         stepType={step?.type || ''}
       />
     )
@@ -80,7 +80,7 @@ function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
       <RunLengthEncoder
         original={data.original}
         encoded={data.encoded}
-        activeIndex={(step?.indices as number[])[0] ?? -1}
+        activeIndex={(step?.indices as number[] | undefined)?.[0] ?? -1}
         currentChar={data.currentChar}
         count={data.count}
       />

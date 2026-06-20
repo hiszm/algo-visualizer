@@ -1,44 +1,44 @@
 import type { Step } from '@/types/algorithm'
 
-export function primalityTestSteps(input: { n: number }): Step[] {
-  const { n } = input
+export function primalityTestSteps(input: { a: number }): Step[] {
+  const a = input.a
   const steps: Step[] = []
 
   steps.push({
     type: 'visit',
-    indices: ['n'],
+    indices: ['a'],
     pseudocodeLine: 0,
-    message: `判断 ${n} 是否为素数`,
-    data: { n, divisor: null, isPrime: null },
+    message: `判断 ${a} 是否为素数`,
+    data: { a, b: null, isPrime: null },
   })
 
-  if (n < 2) {
+  if (a < 2) {
     steps.push({
       type: 'final',
       indices: [],
       pseudocodeLine: 1,
-      message: `${n} 小于 2，不是素数`,
-      data: { n, divisor: null, isPrime: false },
+      message: `${a} 小于 2，不是素数`,
+      data: { a, b: null, isPrime: false },
     })
     return steps
   }
 
-  for (let divisor = 2; divisor * divisor <= n; divisor++) {
+  for (let b = 2; b * b <= a; b++) {
     steps.push({
       type: 'compare',
-      indices: ['n', 'divisor'],
+      indices: ['a', 'b'],
       pseudocodeLine: 2,
-      message: `尝试用 ${divisor} 整除 ${n}`,
-      data: { n, divisor, isPrime: null },
+      message: `尝试用 ${b} 整除 ${a}`,
+      data: { a, b, isPrime: null },
     })
 
-    if (n % divisor === 0) {
+    if (a % b === 0) {
       steps.push({
         type: 'final',
-        indices: ['divisor'],
+        indices: ['b'],
         pseudocodeLine: 3,
-        message: `${n} 能被 ${divisor} 整除，不是素数`,
-        data: { n, divisor, isPrime: false },
+        message: `${a} 能被 ${b} 整除，不是素数`,
+        data: { a, b, isPrime: false },
       })
       return steps
     }
@@ -46,10 +46,10 @@ export function primalityTestSteps(input: { n: number }): Step[] {
 
   steps.push({
     type: 'final',
-    indices: ['n'],
+    indices: ['a'],
     pseudocodeLine: 4,
-    message: `没有找到能整除 ${n} 的数，${n} 是素数`,
-    data: { n, divisor: null, isPrime: true },
+    message: `没有找到能整除 ${a} 的数，${a} 是素数`,
+    data: { a, b: null, isPrime: true },
   })
 
   return steps
