@@ -27,11 +27,11 @@ export default function SortingBars({ array, activeIndices, stepType }: SortingB
 
         return (
           <div key={index} className={styles.barWrapper}>
-            <span className={styles.label}>{value}</span>
             <div
               className={barClass}
               style={{ height: `${height}%` }}
             />
+            <span className={styles.label}>{value}</span>
           </div>
         )
       })}
