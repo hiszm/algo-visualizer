@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: command === 'build' ? '/algorithm-animation-site/' : '/',
+  base: command === 'build' ? '/algo-visualizer/' : '/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
