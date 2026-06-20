@@ -81,15 +81,17 @@ export default function AlgorithmDetail() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.breadcrumbs}>
-        <Link to="/">首页</Link>
-        <span className={styles.breadcrumbSeparator}> &gt; </span>
-        <Link to={`/category/${algorithm.categoryId}`}>{categoryNames[algorithm.categoryId] || algorithm.categoryId}</Link>
-        <span className={styles.breadcrumbSeparator}> &gt; </span>
-        <span>{algorithm.name}</span>
-      </div>
-      <h1 className={styles.title}>{algorithm.name}</h1>
-      <p className={styles.description}>{algorithm.description}</p>
+      <section className={styles.hero}>
+        <div className={styles.breadcrumbs}>
+          <Link to="/">首页</Link>
+          <span className={styles.breadcrumbSeparator}> &gt; </span>
+          <Link to={`/category/${algorithm.categoryId}`}>{categoryNames[algorithm.categoryId] || algorithm.categoryId}</Link>
+          <span className={styles.breadcrumbSeparator}> &gt; </span>
+          <span>{algorithm.name}</span>
+        </div>
+        <h1 className={styles.title}>{algorithm.name}</h1>
+        <p className={styles.description}>{algorithm.description}</p>
+      </section>
 
       <div className={styles.content}>
         <div className={styles.stageColumn}>

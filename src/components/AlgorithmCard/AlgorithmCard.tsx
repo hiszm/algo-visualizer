@@ -15,7 +15,11 @@ export default function AlgorithmCard({ algorithm }: AlgorithmCardProps) {
   const difficulty = difficultyMap[algorithm.difficulty] || { text: algorithm.difficulty, class: '' }
 
   return (
-    <Link to={`/algorithm/${algorithm.id}`} className={styles.card}>
+    <Link
+      to={`/algorithm/${algorithm.id}`}
+      className={styles.card}
+      data-category={algorithm.categoryId}
+    >
       <div className={styles.header}>
         <h3 className={styles.title}>{algorithm.name}</h3>
         <span className={`${styles.tag} ${difficulty.class}`}>{difficulty.text}</span>

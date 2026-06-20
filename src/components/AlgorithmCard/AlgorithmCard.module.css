@@ -1,15 +1,40 @@
 .card {
+  position: relative;
   display: block;
   background: var(--color-bg-base);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-base);
-  padding: var(--spacing-md);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border: none;
+  border-radius: var(--radius-large);
+  padding: var(--spacing-xl);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-primary);
+}
+
+.card[data-category='sorting']::before {
+  background: linear-gradient(90deg, #1890ff, #40a9ff);
+}
+
+.card[data-category='searching']::before {
+  background: linear-gradient(90deg, #fa8c16, #ffc53d);
+}
+
+.card[data-category='graph']::before {
+  background: linear-gradient(90deg, #52c41a, #95de64);
 }
 
 .card:hover {
-  border-color: var(--color-primary-light);
-  box-shadow: var(--shadow-1);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
 }
 
 .header {
@@ -20,15 +45,15 @@
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--color-text-primary);
 }
 
 .description {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
+  font-size: 14px;
+  color: var(--color-text-regular);
+  line-height: 1.6;
 }
 
 .tag {
