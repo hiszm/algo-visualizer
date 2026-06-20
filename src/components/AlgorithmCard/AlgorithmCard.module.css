@@ -1,0 +1,53 @@
+.card {
+  display: block;
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  padding: var(--spacing-md);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: var(--radius-small);
+}
+
+.beginner {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.intermediate {
+  background: #fff2e8;
+  color: #fa8c16;
+}
+
+.advanced {
+  background: #fff1f0;
+  color: #f5222d;
+}
