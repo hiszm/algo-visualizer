@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, Navigate, Link } from 'react-router-dom'
 import { useMemo } from 'react'
 import { getAlgorithmById } from '@/data/algorithms'
 import { useAlgorithmPlayer } from '@/hooks/useAlgorithmPlayer'
@@ -11,6 +11,12 @@ import GraphCanvas from '@/components/GraphCanvas/GraphCanvas'
 import type { GraphNode, GraphEdge } from '@/lib/graphLayout'
 import type { Algorithm, Step } from '@/types/algorithm'
 import styles from './AlgorithmDetail.module.css'
+
+const categoryNames: Record<string, string> = {
+  sorting: '排序',
+  searching: '搜索',
+  graph: '图论',
+}
 
 function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
   if (algorithm.renderer === 'sorting') {
@@ -76,35 +82,41 @@ export default function AlgorithmDetail() {
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumbs}>
-        <a href="#/">首页</a>
+        <Link to="/">首页</Link>
         <span className={styles.breadcrumbSeparator}> &gt; </span>
-        <a href={`#/category/${algorithm.categoryId}`}>{algorithm.categoryId === 'sorting' ? '排序' : algorithm.categoryId === 'searching' ? '搜索' : algorithm.categoryId === 'graph' ? '图论' : algorithm.categoryId}</a>
+        <Link to={`/category/${algorithm.categoryId}`}>{categoryNames[algorithm.categoryId] || algorithm.categoryId}</Link>
         <span className={styles.breadcrumbSeparator}> &gt; </span>
         <span>{algorithm.name}</span>
       </div>
       <h1 className={styles.title}>{algorithm.name}</h1>
       <p className={styles.description}>{algorithm.description}</p>
 
-      <AnimationStage message={step?.message || '点击播放开始'}>
-        {renderVisualization(algorithm, step)}
-      </AnimationStage>
+      <div className={styles.content}>
+        <div className={styles.stageColumn}>
+          <AnimationStage message={step?.message || '点击播放开始'}>
+            {renderVisualization(algorithm, step)}
+          </AnimationStage>
 
-      <div className={styles.controlWrapper}>
-        <ControlBar
-          isPlaying={isPlaying}
-          currentStep={currentStep}
-          totalSteps={steps.length}
-          speed={speed}
-          onPlay={play}
-          onPause={pause}
-          onReset={reset}
-          onNext={next}
-          onPrev={prev}
-          onSpeedChange={setSpeed}
-        />
+          <div className={styles.controlWrapper}>
+            <ControlBar
+              isPlaying={isPlaying}
+              currentStep={currentStep}
+              totalSteps={steps.length}
+              speed={speed}
+              onPlay={play}
+              onPause={pause}
+              onReset={reset}
+              onNext={next}
+              onPrev={prev}
+              onSpeedChange={setSpeed}
+            />
+          </div>
+        </div>
+
+        <div className={styles.infoColumn}>
+          <InfoPanel algorithm={algorithm} activeLine={step?.pseudocodeLine ?? -1} />
+        </div>
       </div>
-
-      <InfoPanel algorithm={algorithm} activeLine={step?.pseudocodeLine ?? -1} />
     </div>
   )
 }

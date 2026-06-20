@@ -15,6 +15,7 @@
   align-items: center;
   flex: 1;
   max-width: 48px;
+  height: 100%;
 }
 
 .bar {
@@ -31,6 +32,10 @@
 
 .swap {
   background: var(--color-error);
+}
+
+.final {
+  background: var(--color-success);
 }
 
 .label {

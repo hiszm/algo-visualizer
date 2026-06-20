@@ -34,5 +34,26 @@
 }
 
 .controlWrapper {
-  margin: var(--spacing-md) 0;
+  margin: var(--spacing-md) 0 0;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+.stageColumn {
+  min-width: 0;
+}
+
+.infoColumn {
+  min-width: 0;
+}
+
+@media (max-width: 992px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
 }

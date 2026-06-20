@@ -16,7 +16,13 @@ export default function SortingBars({ array, activeIndices, stepType }: SortingB
         const height = (value / max) * 100
         let barClass = styles.bar
         if (isActive) {
-          barClass += stepType === 'swap' ? ` ${styles.swap}` : ` ${styles.compare}`
+          if (stepType === 'swap') {
+            barClass += ` ${styles.swap}`
+          } else if (stepType === 'final') {
+            barClass += ` ${styles.final}`
+          } else {
+            barClass += ` ${styles.compare}`
+          }
         }
 
         return (
