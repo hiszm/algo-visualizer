@@ -1,7 +1,17 @@
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout/Layout'
+import Home from './pages/Home'
+import Category from './pages/Category'
+import AlgorithmDetail from './pages/AlgorithmDetail'
+
 export default function App() {
   return (
-    <div style={{ padding: 24, color: 'var(--color-primary)', fontSize: 24 }}>
-      CSS Variables Work
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="category/:categoryId" element={<Category />} />
+        <Route path="algorithm/:algorithmId" element={<AlgorithmDetail />} />
+      </Route>
+    </Routes>
   )
 }
