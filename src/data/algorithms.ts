@@ -6,7 +6,8 @@ import { heapSortSteps } from '@/lib/steps/heapSort'
 import { mergeSortSteps } from '@/lib/steps/mergeSort'
 import { quickSortSteps } from '@/lib/steps/quickSort'
 import { linearSearchSteps } from '@/lib/steps/linearSearch'
-import { binarySearchSteps } from '@/lib/steps/binarySearch'
+import { bfsSteps } from '@/lib/steps/bfs'
+import { dfsSteps } from '@/lib/steps/dfs'
 
 export const algorithms: Algorithm[] = [
   {
@@ -165,6 +166,77 @@ export const algorithms: Algorithm[] = [
     defaultInput: { array: [1, 3, 5, 7, 9], target: 7 },
     generateSteps: binarySearchSteps,
     renderer: 'searching',
+  },
+  {
+    id: 'bfs',
+    name: '广度优先搜索',
+    categoryId: 'graph',
+    description: '从起点出发，逐层访问所有相邻节点。',
+    difficulty: 'beginner',
+    timeComplexity: 'O(V + E)',
+    spaceComplexity: 'O(V)',
+    pseudocode: [
+      'queue = [start]',
+      'visited = {start}',
+      'while queue not empty',
+      '  node = queue.pop()',
+      '  for neighbor in adj[node]',
+      '    if neighbor not in visited',
+      '      visited.add(neighbor)',
+      '      queue.push(neighbor)',
+    ],
+    defaultInput: {
+      nodes: [
+        { id: 'A', label: 'A' },
+        { id: 'B', label: 'B' },
+        { id: 'C', label: 'C' },
+        { id: 'D', label: 'D' },
+        { id: 'E', label: 'E' },
+      ],
+      edges: [
+        { from: 'A', to: 'B' },
+        { from: 'A', to: 'C' },
+        { from: 'B', to: 'D' },
+        { from: 'C', to: 'E' },
+      ],
+      startId: 'A',
+    },
+    generateSteps: bfsSteps,
+    renderer: 'graph',
+  },
+  {
+    id: 'dfs',
+    name: '深度优先搜索',
+    categoryId: 'graph',
+    description: '从起点出发，沿着一条路径尽可能深入，再回溯。',
+    difficulty: 'beginner',
+    timeComplexity: 'O(V + E)',
+    spaceComplexity: 'O(V)',
+    pseudocode: [
+      'dfs(node)',
+      '  visited.add(node)',
+      '  for neighbor in adj[node]',
+      '    if neighbor not in visited',
+      '      dfs(neighbor)',
+    ],
+    defaultInput: {
+      nodes: [
+        { id: 'A', label: 'A' },
+        { id: 'B', label: 'B' },
+        { id: 'C', label: 'C' },
+        { id: 'D', label: 'D' },
+        { id: 'E', label: 'E' },
+      ],
+      edges: [
+        { from: 'A', to: 'B' },
+        { from: 'A', to: 'C' },
+        { from: 'B', to: 'D' },
+        { from: 'C', to: 'E' },
+      ],
+      startId: 'A',
+    },
+    generateSteps: dfsSteps,
+    renderer: 'graph',
   },
 ]
 
