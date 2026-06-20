@@ -65,11 +65,6 @@ describe('dfsSteps', () => {
     // DFS from A should reach D before C (or C before D depending on adj order)
     // With our adjacency list (A: [B, C]), DFS should go A -> B -> D -> C
     const steps = dfsSteps({ nodes, edges, startId: 'A' })
-    const visitedOrder = steps
-      .filter(s => s.type === 'visit' || s.type === 'compare')
-      .map(s => s.indices as string[])
-
-    // The first visit is A, then B is discovered, then D, then C
     // We just verify D is visited before C in the visited set progression
     const finalVisited = steps[steps.length - 1].data.visited
     expect(finalVisited).toEqual(['A', 'B', 'D', 'C'])

@@ -6,8 +6,12 @@ import { heapSortSteps } from '@/lib/steps/heapSort'
 import { mergeSortSteps } from '@/lib/steps/mergeSort'
 import { quickSortSteps } from '@/lib/steps/quickSort'
 import { linearSearchSteps } from '@/lib/steps/linearSearch'
+import { binarySearchSteps } from '@/lib/steps/binarySearch'
 import { bfsSteps } from '@/lib/steps/bfs'
 import { dfsSteps } from '@/lib/steps/dfs'
+import { dijkstraSteps } from '@/lib/steps/dijkstra'
+import { bellmanFordSteps } from '@/lib/steps/bellmanFord'
+import { astarSteps } from '@/lib/steps/astar'
 
 export const algorithms: Algorithm[] = [
   {
@@ -236,6 +240,123 @@ export const algorithms: Algorithm[] = [
       startId: 'A',
     },
     generateSteps: dfsSteps,
+    renderer: 'graph',
+  },
+  {
+    id: 'dijkstra',
+    name: 'Dijkstra 最短路径',
+    categoryId: 'graph',
+    description: '贪心算法：每次选择距离起点最近的未确定节点，逐步扩展最短路径树。',
+    difficulty: 'intermediate',
+    timeComplexity: 'O(V + E log V)',
+    spaceComplexity: 'O(V)',
+    pseudocode: [
+      'dist[start] = 0, dist[others] = INF',
+      'while unvisited nodes remain',
+      '  pick unvisited node with min dist',
+      '  for each neighbor of picked node',
+      '    if dist[picked] + weight < dist[neighbor]',
+      '      dist[neighbor] = dist[picked] + weight',
+      'return dist',
+    ],
+    defaultInput: {
+      nodes: [
+        { id: 'A', label: 'A' },
+        { id: 'B', label: 'B' },
+        { id: 'C', label: 'C' },
+        { id: 'D', label: 'D' },
+      ],
+      edges: [
+        { from: 'A', to: 'B', weight: 1 },
+        { from: 'A', to: 'C', weight: 4 },
+        { from: 'B', to: 'C', weight: 2 },
+        { from: 'B', to: 'D', weight: 5 },
+        { from: 'C', to: 'D', weight: 1 },
+      ],
+      startId: 'A',
+    },
+    generateSteps: dijkstraSteps,
+    renderer: 'graph',
+  },
+  {
+    id: 'bellman-ford',
+    name: 'Bellman-Ford 最短路径',
+    categoryId: 'graph',
+    description: '动态规划：对每条边进行 V-1 轮松弛，可检测负权环。',
+    difficulty: 'intermediate',
+    timeComplexity: 'O(V * E)',
+    spaceComplexity: 'O(V)',
+    pseudocode: [
+      'dist[start] = 0, dist[others] = INF',
+      'for i = 1 to V-1',
+      '  for each edge (u, v) with weight w',
+      '    if dist[u] + w < dist[v]',
+      '      dist[v] = dist[u] + w',
+      'for each edge (u, v) with weight w',
+      '  if dist[u] + w < dist[v]',
+      '    negative cycle detected',
+      'return dist',
+    ],
+    defaultInput: {
+      nodes: [
+        { id: 'A', label: 'A' },
+        { id: 'B', label: 'B' },
+        { id: 'C', label: 'C' },
+        { id: 'D', label: 'D' },
+      ],
+      edges: [
+        { from: 'A', to: 'B', weight: 1 },
+        { from: 'A', to: 'C', weight: 4 },
+        { from: 'B', to: 'C', weight: 2 },
+        { from: 'B', to: 'D', weight: 5 },
+        { from: 'C', to: 'D', weight: 1 },
+      ],
+      startId: 'A',
+    },
+    generateSteps: bellmanFordSteps,
+    renderer: 'graph',
+  },
+  {
+    id: 'astar',
+    name: 'A* 搜索',
+    categoryId: 'graph',
+    description: '启发式搜索：结合已走路径代价和预估代价，优先探索最有希望的方向。',
+    difficulty: 'advanced',
+    timeComplexity: 'O(E)',
+    spaceComplexity: 'O(V)',
+    pseudocode: [
+      'openSet = {start}, closedSet = {}',
+      'g[start] = 0, f[start] = heuristic(start, goal)',
+      'while openSet not empty',
+      '  current = node in openSet with lowest f',
+      '  if current == goal, return path',
+      '  move current from openSet to closedSet',
+      '  for each neighbor of current',
+      '    if neighbor in closedSet, skip',
+      '    tentative = g[current] + weight',
+      '    if tentative < g[neighbor]',
+      '      g[neighbor] = tentative',
+      '      f[neighbor] = g[neighbor] + heuristic(neighbor, goal)',
+      '      add neighbor to openSet',
+      'return failure',
+    ],
+    defaultInput: {
+      nodes: [
+        { id: 'A', label: 'A', x: 0, y: 0 },
+        { id: 'B', label: 'B', x: 1, y: 0 },
+        { id: 'C', label: 'C', x: 2, y: 0 },
+        { id: 'D', label: 'D', x: 1, y: 1 },
+      ],
+      edges: [
+        { from: 'A', to: 'B', weight: 1 },
+        { from: 'A', to: 'D', weight: 2 },
+        { from: 'B', to: 'C', weight: 1 },
+        { from: 'D', to: 'C', weight: 2 },
+      ],
+      startId: 'A',
+      endId: 'C',
+    },
+    generateSteps: astarSteps,
     renderer: 'graph',
   },
 ]
