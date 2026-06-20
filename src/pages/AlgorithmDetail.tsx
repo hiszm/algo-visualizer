@@ -75,6 +75,13 @@ export default function AlgorithmDetail() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.breadcrumbs}>
+        <a href="#/">首页</a>
+        <span className={styles.breadcrumbSeparator}> &gt; </span>
+        <a href={`#/category/${algorithm.categoryId}`}>{algorithm.categoryId === 'sorting' ? '排序' : algorithm.categoryId === 'searching' ? '搜索' : algorithm.categoryId === 'graph' ? '图论' : algorithm.categoryId}</a>
+        <span className={styles.breadcrumbSeparator}> &gt; </span>
+        <span>{algorithm.name}</span>
+      </div>
       <h1 className={styles.title}>{algorithm.name}</h1>
       <p className={styles.description}>{algorithm.description}</p>
 

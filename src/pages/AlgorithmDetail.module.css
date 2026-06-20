@@ -2,6 +2,25 @@
   padding: var(--spacing-lg) 0;
 }
 
+.breadcrumbs {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.breadcrumbs a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+  margin: 0 4px;
+}
+
 .title {
   font-size: 24px;
   font-weight: 600;

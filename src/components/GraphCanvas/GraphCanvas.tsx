@@ -22,7 +22,7 @@ export default function GraphCanvas({ nodes, edges, activeNodeIds, activeEdgeIds
 
   return (
     <svg className={styles.canvas} viewBox={`0 0 ${width} ${height}`}>
-      {edges.map((edge, index) => {
+      {edges.map((edge) => {
         const from = nodeMap.get(edge.from)
         const to = nodeMap.get(edge.to)
         if (!from || !to) return null
@@ -30,7 +30,7 @@ export default function GraphCanvas({ nodes, edges, activeNodeIds, activeEdgeIds
         const isActive = activeEdgeIds.includes(edgeId)
 
         return (
-          <g key={index}>
+          <g key={edgeId}>
             <line
               x1={from.x}
               y1={from.y}

@@ -12,7 +12,7 @@ export default function AlgorithmCard({ algorithm }: AlgorithmCardProps) {
     intermediate: { text: '进阶', class: styles.intermediate },
     advanced: { text: '高级', class: styles.advanced },
   }
-  const difficulty = difficultyMap[algorithm.difficulty]
+  const difficulty = difficultyMap[algorithm.difficulty] || { text: algorithm.difficulty, class: '' }
 
   return (
     <Link to={`/algorithm/${algorithm.id}`} className={styles.card}>

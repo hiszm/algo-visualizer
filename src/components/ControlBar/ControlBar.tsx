@@ -38,7 +38,7 @@ export default function ControlBar({
         <button onClick={onReset} className={styles.button}>重置</button>
       </div>
       <div className={styles.speed}>
-        <span>速度</span>
+        <span>间隔</span>
         <input
           type="range"
           min={100}
