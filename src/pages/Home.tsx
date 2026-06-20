@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 import { categories } from '@/data/categories'
 import styles from './Home.module.css'
 
+const categoryDescriptions: Record<string, string> = {
+  sorting: '冒泡、选择、插入、堆、归并、快速排序',
+  searching: '线性搜索与二分搜索',
+  graph: 'BFS、DFS、Dijkstra、Bellman-Ford、A*',
+}
+
 export default function Home() {
   const enabledCategories = categories.filter(c => c.enabled)
 
@@ -21,13 +27,14 @@ export default function Home() {
         <h2 className={styles.sectionTitle}>核心分类</h2>
         <div className={styles.grid}>
           {enabledCategories.map(category => (
-            <Link key={category.id} to={`/category/${category.id}`} className={styles.card}>
+            <Link
+              key={category.id}
+              to={`/category/${category.id}`}
+              className={styles.card}
+              data-category={category.id}
+            >
               <h3 className={styles.cardTitle}>{category.name}</h3>
-              <p className={styles.cardDesc}>
-                {category.id === 'sorting' && '冒泡、选择、插入、堆、归并、快速排序'}
-                {category.id === 'searching' && '线性搜索与二分搜索'}
-                {category.id === 'graph' && 'BFS、DFS、Dijkstra、Bellman-Ford、A*'}
-              </p>
+              <p className={styles.cardDesc}>{categoryDescriptions[category.id]}</p>
             </Link>
           ))}
         </div>
