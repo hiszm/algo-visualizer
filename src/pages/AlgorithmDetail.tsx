@@ -7,6 +7,8 @@ import SearchList from '@/components/SearchList/SearchList'
 import ControlBar from '@/components/ControlBar/ControlBar'
 import AnimationStage from '@/components/AnimationStage/AnimationStage'
 import InfoPanel from '@/components/InfoPanel/InfoPanel'
+import GraphCanvas from '@/components/GraphCanvas/GraphCanvas'
+import type { GraphNode, GraphEdge } from '@/lib/graphLayout'
 import type { Algorithm, Step } from '@/types/algorithm'
 import styles from './AlgorithmDetail.module.css'
 
@@ -29,6 +31,18 @@ function renderVisualization(algorithm: Algorithm, step: Step | undefined) {
         target={data.target}
         activeIndices={(step?.indices as number[]) || []}
         foundIndex={data.foundIndex}
+      />
+    )
+  }
+
+  if (algorithm.renderer === 'graph') {
+    const data = step?.data || algorithm.defaultInput
+    return (
+      <GraphCanvas
+        nodes={data.nodes as GraphNode[]}
+        edges={data.edges as GraphEdge[]}
+        activeNodeIds={(step?.indices as string[]) || []}
+        activeEdgeIds={data.activeEdgeIds || []}
       />
     )
   }

@@ -1,0 +1,42 @@
+.canvas {
+  width: 100%;
+  height: 320px;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-base);
+}
+
+.edge {
+  stroke: var(--color-border);
+  stroke-width: 2;
+  transition: stroke 0.2s ease;
+}
+
+.activeEdge {
+  stroke: var(--color-warning);
+  stroke-width: 3;
+}
+
+.edgeLabel {
+  font-size: 12px;
+  fill: var(--color-text-secondary);
+  text-anchor: middle;
+}
+
+.node {
+  fill: var(--color-bg-base);
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.activeNode {
+  fill: #e6f7ff;
+  stroke: var(--color-primary-dark);
+  stroke-width: 3;
+}
+
+.nodeLabel {
+  font-size: 14px;
+  fill: var(--color-text-primary);
+  pointer-events: none;
+}
